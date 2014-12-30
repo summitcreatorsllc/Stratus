@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="AmazonWebServicesHelper.Controls.AwsServiceBrowser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:AmazonWebServicesHelper.Icons"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:ServiceColorConverter x:Key="colorConverter" />
+        <converters:ServiceNameConverter x:Key="nameConverter" />
+        <ItemsPanelTemplate x:Key="wrapPanelTemplate">
+            <WrapPanel ItemWidth="120" ItemHeight="130" />
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="pictureItemTemplate">
+            <Grid Margin="5" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Image Width="90" Height="90" Stretch="Uniform"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding ResourceName}" />
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,5" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextAlignment="Center" FontSize="13" FontWeight="Bold" Text="{Binding ServiceName}" />
+            </Grid>
+        </DataTemplate>
+        <Style TargetType="ListViewItem" x:Key="lsStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Setter Property="Background" Value="#44000000" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="gStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Expander IsExpanded="True" BorderBrush="{Binding Path=Name, Converter={StaticResource ResourceKey=colorConverter}}" Background="{Binding Path=Name, Converter={StaticResource ResourceKey=colorConverter}}">
+                            <Expander.Header>
+                                <TextBlock Text="{Binding Path=Name, Converter={StaticResource ResourceKey=nameConverter}}" FontWeight="Bold" Foreground="White" FontSize="22" VerticalAlignment="Bottom" />
+                            </Expander.Header>
+                            <ItemsPresenter />
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ListView Name="lsView1" ItemsPanel="{StaticResource ResourceKey=wrapPanelTemplate}" ItemTemplate="{StaticResource ResourceKey=pictureItemTemplate}" ItemContainerStyle="{StaticResource ResourceKey=lsStyle}">
+            <ListView.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource ResourceKey=gStyle}" />
+            </ListView.GroupStyle>
+        </ListView>
+        <ListView Name="lsView2" Grid.Column="1" ItemsPanel="{StaticResource ResourceKey=wrapPanelTemplate}" ItemTemplate="{StaticResource ResourceKey=pictureItemTemplate}" ItemContainerStyle="{StaticResource ResourceKey=lsStyle}">
+            <ListView.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource ResourceKey=gStyle}" />
+            </ListView.GroupStyle>
+        </ListView>
+    </Grid>
+</UserControl>

@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D500A5B9-943A-4363-A8BE-C3F48B7C13D1}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AmazonWebServicesHelper</RootNamespace>
+    <AssemblyName>AmazonWebServicesHelper</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK">
+      <HintPath>..\packages\AWSSDK.2.3.14.0\lib\net45\AWSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.1.0.0.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.0.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ArnResource.cs" />
+    <Compile Include="Controls\AwsServiceBrowser.xaml.cs">
+      <DependentUpon>AwsServiceBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PolicyExplorer.xaml.cs">
+      <DependentUpon>PolicyExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\InvalidCredentialException.cs" />
+    <Compile Include="Exceptions\InvalidRegionException.cs" />
+    <Compile Include="IAM\IamCredential.cs" />
+    <Compile Include="Dialogs\IamLogin.xaml.cs">
+      <DependentUpon>IamLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IAM\IamPolicy.cs" />
+    <Compile Include="IAM\IamPolicyAction.cs" />
+    <Compile Include="IAM\IamPolicyOrigin.cs" />
+    <Compile Include="IAM\IamPolicyStatement.cs" />
+    <Compile Include="IAM\IamStatementRule.cs" />
+    <Compile Include="Icons\ServiceCategory.cs" />
+    <Compile Include="Icons\ServiceColorConverter.cs" />
+    <Compile Include="Icons\ServiceItem.cs" />
+    <Compile Include="Icons\ServiceNameConverter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\AwsServiceBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\IamLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\PolicyExplorer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\advisor\trustedAdvisorService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\cloudtrail\cloudtrailService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\cloudwatch\alarm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\cloudwatch\cloudwatchService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\config\configService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analytics\datapipeline\datapipelineService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analytics\kinesis\app.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analytics\kinesis\kinesisService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analytics\mapreduce\cluster.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analytics\mapreduce\engine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analytics\mapreduce\m3engine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analytics\mapreduce\m5engine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analytics\mapreduce\m7engine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Analytics\mapreduce\mapreduceService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\appstream\appstreamService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\cloudsearch\cloudsearchService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\cloudsearch\sdfMetadata.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\ses\email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\ses\sesService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\sqs\message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\sqs\queue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\sqs\sqsService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\swf\decider.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\swf\swfService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\swf\worker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Application\transcoder\transcoderService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\ami.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\dbOnInstance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\ec2service.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\elasticIP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\instance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\instances.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\instanceWithCloudwatch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\optimizedInstance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\lambda\lambdaService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\dynamo\attribute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\dynamo\attributes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\dynamo\dynamoService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\dynamo\globalSecondaryIndex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\dynamo\item.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\dynamo\items.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\dynamo\table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\elasticache\cacheNode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\elasticache\elasticacheService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\elasticache\memcached.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\elasticache\redis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\dbInstance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\instanceAZstandby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\instanceReadReplica.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\mssqlInstancce.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\mysqlInstance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\oracleInstance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\piop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\postgreInstance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\rdsService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\sqlMaster.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\rds\sqlSlave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\redshift\dw1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\redshift\dw2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\redshift\redshiftService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\redshift\ssd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\simpledb\domain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Database\simpledb\simpledbService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\cloudformation\cloudFormationService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\cloudformation\stack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\cloudformation\template.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\codedeploy\codeDeployService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\elasticbeanstalk\application.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\elasticbeanstalk\deployment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\elasticbeanstalk\elasticBeanstalkService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\opsworks\apps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\opsworks\deployments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\opsworks\instances.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\opsworks\layers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\opsworks\monitoring.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\opsworks\opsWorksService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\opsworks\permissions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\opsworks\resources.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Deployment_Management\opsworks\stack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Enterprise\workspaces\workspacesService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Enterprise\zocalo\zocaloService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Mobile\cognito\cognitoService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Mobile\mobileanalytics\mobileAnalyticsService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Mobile\sns\emailNotification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Mobile\sns\httpNotification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Mobile\sns\snsService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Mobile\sns\topicNotification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\directConnect\directConnectService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\autoScaling.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Compute\ec2\elbService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\elasticNetworkInstance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\route53\hostedZone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\route53\route53service.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\route53\routeTable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\vpc\customerGateway.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\vpc\internetGateway.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\vpc\router.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\vpc\virtualPrivateGateway.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\vpc\vpcPeering.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\vpc\vpcService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Networking\vpc\vpn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\directory\directoryService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\encryptedData.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\encryptionKey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\iamAddon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\iamService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\longTermCredential.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\mfaToken.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\permissions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\role.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\securityTokenService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Administration_Security\iam\temporaryCredential.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\cloudfront\cloudfrontService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\cloudfront\downloadDistribution.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\cloudfront\edgeLocation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\cloudfront\streamingDistribution.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\ebs\ebsService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\ebs\snapshot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\ebs\volume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\gateway\cachedVolume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\gateway\nonCachedVolume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\gateway\storageGatewayService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\gateway\virtualTapeLibrary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\glacier\archive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\glacier\glacierService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\glacier\vault.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\importexport\importExportService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\s3\object.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\s3\s3bucket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\s3\s3bucketWithObjects.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Storage\s3\s3service.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

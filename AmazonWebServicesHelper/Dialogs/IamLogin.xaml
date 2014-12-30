@@ -1,0 +1,55 @@
+﻿<controls:MetroWindow x:Class="AmazonWebServicesHelper.Dialogs.IamLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Loaded="Window_Loaded"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="IAM User Login" Height="425" Width="550" WindowState="Normal"
+        BorderThickness="2" GlowBrush="{StaticResource AccentColorBrush}" BorderBrush="{StaticResource AccentColorBrush}"   
+        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize">
+<Grid Margin="10,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="16" TextWrapping="Wrap">Select the Credential Profile to use, or specify credentials manually.</TextBlock>
+        
+        <RadioButton IsChecked="True" FontWeight="Bold" Grid.Row="1" Margin="0,10,0,0" Content="Select a Profile from this User Store" Name="profileRadio" Checked="customRadio_Checked" />
+        <DataGrid IsReadOnly="True" SelectionChanged="iamProfiles_SelectionChanged" Grid.Row="2" Margin="0,5" Name="iamProfiles" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" />
+                <DataGridTextColumn Header="Default Region" Binding="{Binding Region}" />
+                <DataGridTextColumn Header="Key" Binding="{Binding AccessKey}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <RadioButton Margin="0,5,0,0" FontWeight="Bold" Grid.Row="3" Content="Custom IAM Credentials" Name="customRadio" Checked="customRadio_Checked" />
+        <Grid Name="customGrid" IsEnabled="False" Grid.Row="4" Margin="0,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Margin="5" VerticalAlignment="Center">Access Key:</TextBlock>
+            <TextBlock Grid.Row="1" Margin="5" VerticalAlignment="Center">Secret Key:</TextBlock>
+            <TextBlock Grid.Row="2" Margin="5" VerticalAlignment="Center">Default Region:</TextBlock>
+            
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,0,2" Name="accessKeyTxt" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,2,0,2" Name="secretKeyTxt" />
+            <ComboBox Name="regionList" Grid.Row="2" Grid.Column="1" Margin="5,2,0,2" DisplayMemberPath="DisplayName" />
+        </Grid>
+
+        <UniformGrid HorizontalAlignment="Right" Grid.Row="5" Rows="1" Columns="4">
+            <Button Name="deleteProfileBtn"         Margin="0,0,2,0"    Width="100" Click="deleteProfileBtn_Click"      Content="Remove Profile"     Cursor="Hand" />
+            <Button Name="testPolicyBtn"            Margin="2,0"        Width="100" Click="testPolicyBtn_Click"         Content="Test Policy"        Cursor="Hand" />
+            <Button Name="addToProfileListBtn"      Margin="2,0"        Width="100" Click="addToProfileListBtn_Click"   Content="Add Profile"        Cursor="Hand" />
+            <Button Name="beginBtn"                 Margin="2,0,0,0"    Width="100" Click="beginBtn_Click"              Content="Connect"            Cursor="Hand" />
+        </UniformGrid>
+    </Grid>
+</controls:MetroWindow>

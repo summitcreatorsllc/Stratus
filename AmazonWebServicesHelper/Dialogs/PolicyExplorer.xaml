@@ -1,0 +1,11 @@
+﻿<controls:MetroWindow x:Class="AmazonWebServicesHelper.Dialogs.PolicyExplorer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        BorderThickness="2" GlowBrush="{StaticResource AccentColorBrush}" BorderBrush="{StaticResource AccentColorBrush}"   
+        Title="Policy Explorer - " Height="500" Width="600" Loaded="Window_Loaded" WindowStyle="ToolWindow">
+    <Grid Margin="5">
+        <TreeView Name="policyTree" Visibility="Collapsed" FontSize="14" />
+        <controls:ProgressRing Name="loadingRing" Width="75" Height="75" IsActive="True" />
+    </Grid>
+</controls:MetroWindow>
